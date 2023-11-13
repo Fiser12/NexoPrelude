@@ -2,20 +2,20 @@ import { useLocation as useLocationRealm, NavLink as NavLinkRemix } from '@remix
 import { useLocation as useLocationVite, NavLink as NavLinkReact, NavLinkProps } from 'react-router-dom';
 import { FC } from 'react';
 import { Page, PageContent } from '../cms/page.model';
-
+/*
 type Location = ReturnType<typeof useLocationRealm>;
-
+*/
 function checkRealmVersion(): Boolean {
     return typeof process !== 'undefined' && process.env.REALM_ENV === 'true';
 }
-
+/*
 function useLocation(): Location {
     if (checkRealmVersion()) {
         return useLocationRealm();
     } else {
         return useLocationVite();
     }
-}
+}*/
 
 const NavLink: FC<NavLinkProps> = (props) => {
     if (checkRealmVersion()) {
@@ -52,4 +52,4 @@ const NavItem: React.FC<NavItemProps> = ({ item, tabIndex, className, onClick, c
     )
 };
 
-export { useLocation, NavLink, NavItem };
+export { /*useLocation,*/ NavLink, NavItem };
