@@ -24,7 +24,8 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "dependencies": {
-    "@remix-run/react": "^2.2.0"
+    "@remix-run/react": "^2.2.0",
+    "path-to-regexp": "^6.2.1"
   },
   "main": "./dist/index.js",
   "exports": {
