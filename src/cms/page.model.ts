@@ -1,4 +1,4 @@
-import { Optional } from "../optional.type";
+import { Optional } from "../core/optional.type";
 import { ComponentUtilitiesSeo } from "./meta.model";
 
 export interface PageContent {  

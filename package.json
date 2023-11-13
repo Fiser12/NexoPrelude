@@ -26,5 +26,11 @@
   },
   "dependencies": {
     "@remix-run/react": "^2.2.0"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./core": "./dist/core/index.js",
+    "./cms": "./dist/cms/index.js",
+    "./devtools": "./dist/devtools/index.js"
   }
 }
