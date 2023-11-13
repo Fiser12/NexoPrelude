@@ -1,9 +1,15 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",  // Directorio de salida para archivos JS compilados
-    "module": "CommonJS", // Sistema de módulos (CommonJS para Node.js)
-    "target": "es6",     // Versión de ECMAScript de salida
-    // ... otras opciones de configuración
+    "target": "es6",
+    "lib": ["dom", "esnext"],
+    "jsx": "react-jsx",
+    "declaration": true,
+    "module": "CommonJS",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true
   },
-  "include": ["./src/**/*"], // Incluir todos los archivos TypeScript en src
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }
