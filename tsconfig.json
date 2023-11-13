@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",  // Directorio de salida para archivos JS compilados
+    "module": "CommonJS", // Sistema de módulos (CommonJS para Node.js)
+    "target": "es6",     // Versión de ECMAScript de salida
+    // ... otras opciones de configuración
+  },
+  "include": ["./src/**/*"], // Incluir todos los archivos TypeScript en src
+}
