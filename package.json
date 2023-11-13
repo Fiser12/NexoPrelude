@@ -1,5 +1,5 @@
 {
-  "name": "nexoprelude",
+  "name": "@fiser12/nexoprelude",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,5 +12,13 @@
   "license": "ISC",
   "devDependencies": {
     "typescript": "^5.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fiser12/NexoPrelude.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
+
 }
