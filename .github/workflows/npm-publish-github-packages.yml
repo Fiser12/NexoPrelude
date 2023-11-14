@@ -19,8 +19,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          registry-url: https://npm.pkg.github.com/
-          scope: '@fiser12'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -38,9 +37,9 @@ jobs:
         run: yarn build
 
       - name: Publish to GitHub Packages
-        run: yarn publish --non-interactive
+        run: yarn publish --non-interactive --access public
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Push changes
         run: |
