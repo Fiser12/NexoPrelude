@@ -25,10 +25,9 @@ export type AsyncPageRoutes<T> = {
 export const buildPageLoader = <T extends Key>(routesDefinition: RoutesDefinitions<T>, pageByRoute: IPageResolver<T>) => {
   return async (request: Request, lang: string): Promise<Optional<Page<PageContent>>> => {
       const pathname = new URL(request.url).pathname;
-      const key = findRouteKey<T>(routesDefinition.default, pathname);
-      if (!key) return undefined;
-
       const routesDictionary = routesDefinition[lang] ?? routesDefinition.default;
+      const key = findRouteKey<T>(routesDictionary, pathname);
+      if (!key) return undefined;
 
       const foundRoutes = Object.entries(routesDictionary).flatMap(([key, routePattern]) => {
           const matcher = match(routePattern as string, { decode: decodeURIComponent });
