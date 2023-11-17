@@ -1,3 +1,4 @@
+
 import { match } from 'path-to-regexp';
 import { Optional } from '../core';
 import { Page, PageContent } from './page.model';
@@ -22,12 +23,11 @@ export type AsyncPageRoutes<T> = {
 };
 
 export const buildPageLoader = <T extends Key>(routesDefinition: RoutesDefinitions<T>, pageByRoute: IPageResolver<T>) => {
-  function isKeyOfAsyncPageRoutes(key: string) {
-    return key in pageByRoute;
-  }
-
   return async (request: Request, lang: string): Promise<Optional<Page<PageContent>>> => {
     const currentPath = new URL(request.url).pathname;
+    const key = findRouteKey<T>(routesDefinition, request);
+    if (!key) return undefined;
+
     const routesDictionary = routesDefinition[lang] ?? routesDefinition.default;
 
     const foundRoutes = Object.entries(routesDictionary).flatMap(([key, routePattern]) => {
@@ -37,10 +37,22 @@ export const buildPageLoader = <T extends Key>(routesDefinition: RoutesDefinitio
     });
     const foundRoute = foundRoutes[0];
 
-    if (!foundRoute || !isKeyOfAsyncPageRoutes(foundRoute.key)) return undefined;
+    if (!foundRoute) return undefined;
 
     const pageParams = { lang, ...foundRoute.params };
-    return pageByRoute[foundRoute.key as T](pageParams);
+    return pageByRoute[key](pageParams);
   };
 }
 
+export const findRouteKey = <T extends Key>(routesDefinition: RoutesDefinitions<T>, request: Request): T | undefined => {
+  const currentPath = new URL(request.url).pathname;
+  const routesDictionary = routesDefinition.default;
+
+  for (const [key, routePattern] of Object.entries(routesDictionary)) {
+    const matcher = match(routePattern as string, { decode: decodeURIComponent });
+    if (matcher(currentPath)) {
+      return key as T;
+    }
+  }
+  return undefined;
+};
